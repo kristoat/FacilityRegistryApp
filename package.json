@@ -1,0 +1,17 @@
+{
+  "name": "FacilityRegistryApp",
+  "version": "0.0.0",
+  "description": "Project in INF5750 at the University of Oslo",
+  "repository": "https://github.com/johhorn/FacilityRegistryApp",
+  "author": "Kristoffer Adam Tronerud, Johanne Håøy Horn, Joakim Johanson Lindquister",
+  "license": "none",
+  "scripts": {
+    "prestart": "npm install",
+    "postinstall": "bower install",
+    "start": "http-server app/"
+  },
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "http-server": "^0.7.2"
+  }
+}
