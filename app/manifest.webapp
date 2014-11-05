@@ -1,19 +1,20 @@
 ￼{
-	"version": "0.1",
-	"name": "FacilityRegister",
-	"description": "An app that manages search, presentation and editing of organisation units",
-	"launch_path": "/index.html",
-	"icons": {
-		 "16": "/img/icons/mortar-16.png"
-	},
-	"developer": {
-	     "name": "Johanne Håøy Horn, Joakim Lindquister og Kristoffer Adam Tronerud",
-	     "url": "http://inf5750-13.uio.no/apps/jokrijo"
-	},
-	"default_locale": "en",
-	"activities": {
-	      "dhis": {
-	      	      "href": "http://inf5750-13.uio.no"
-		} 
-	}￼
+"version": "0.1",
+"name": "FacilityRegister",
+"description": "An app that manages search, presentation and editing of organisation units",
+"launch_path": "index.html",
+"installs_allowed_from":["*"],
+"icons": {
+"16": "/img/icons/mortar-16.png"
+},
+"developer": {
+"name": "Johanne Håøy Horn, Joakim Lindquister og Kristoffer Adam Tronerud",
+"url": "http://inf5750-13.uio.no/apps/jokrijo"
+},
+"default_locale": "en",
+"activities": {
+"dhis": {
+"href": "http://inf5750-13.uio.no"
+} 
+}￼
 }
