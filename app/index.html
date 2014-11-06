@@ -16,6 +16,7 @@
     <script src="js/app.js"></script>
     <script src="js/controller.js"></script>
     <script src="js/apiService.js"></script>
+    <script src="js/geoService.js"></script>
 </head>
 
 <body>
@@ -24,22 +25,45 @@
 <div ng-controller="siteController">
     <p>{{content}}</p>
 
+    <div ng-controller="listViewController">
 
+    <button class="btn btn-default" ng-click="show_hierarchy()">Show hierarchy</button>
+    <button class="btn btn-default" ng-click="hide_hierarchy()">Show all facilities</button>
+
+    <div ng-hide="isHierarchy">
     <h3> Facility list - Loaded from API</h3>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Unit</th>
-            <th>Short name</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="facility in facilities">
-            <td>{{facility.name}}</td>
-        </tr>
+            <td>{{facility.name}}</td></tr>
         </tbody>
     </table>
+    </div>
+
+    <div ng-show="isHierarchy">
+        <h3> Facility Hierarchy - Loaded from API</h3>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Unit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="facility in topFacilities | orderBy: 'na'">
+                <td>{{facility.na}}</td></tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    </div>
 </div>
 
 </body>
