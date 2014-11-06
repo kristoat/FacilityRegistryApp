@@ -2,7 +2,7 @@
     'use strict';
 
     /* Define modules */
-    angular.module('appServices', []);
+    angular.module('appServices', ['ngResource']);
     angular.module('appControllers', ['appServices']);
 
     /* Define the app */

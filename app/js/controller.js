@@ -1,12 +1,13 @@
 (function(controllers){
     'use strict';
-    controllers.controller('siteController', ['$scope', 'apiService',
-        function($scope, apiService){
+    controllers.controller('siteController', ['$scope', '$rootScope', 'apiService',
+        function($scope, $rootScope, apiService){
             $scope.content = "Hello, this is your controller speaking";
 
             /* Retrieve facilities asynchronous  */
-            apiService.getFacilities().then(function(result){
-                $scope.facilities = result;
+            console.log(apiService);
+            apiService.query(function(result){
+                $scope.facilities = result.organisationUnits;
             });
         }
     ]);
