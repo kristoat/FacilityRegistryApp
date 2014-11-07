@@ -1,35 +1,44 @@
-(function(controllers){
+(function (controllers) {
     'use strict';
-    controllers.controller('siteController', ['$scope', '$rootScope', 'apiService', 'geoService',
-        function($scope, $rootScope, apiService, geoService){
+    controllers.controller('siteController', ['$scope', '$rootScope', 'apiService',
+        function ($scope, $rootScope, apiService) {
             $scope.content = "Hello, this is your controller speaking";
 
+            $scope.getFacilitiesOnLevel = function (level) {
+                apiService.getFacilitiesOnLevel(level).query(function (result) {
+                    $scope.topFacilities = result;
+                });
+            };
+
             /* Retrieve facilities asynchronous  */
-            apiService.query(function(result){
+            apiService.getAllFacilities().query(function (result) {
                 $scope.facilities = result.organisationUnits;
-
             });
 
-            geoService.query(function(result){
-                $scope.topFacilities = result;
-            });
+            $scope.getFacilitiesOnLevel(2);
         }
     ]);
 
-    controllers.controller('listViewController', ['$scope',
-        function($scope) {
+    controllers.controller('listViewController', ['$scope', 'apiService',
+        function ($scope, apiService) {
 
             $scope.isHierarchy = true;
 
-            $scope.show_hierarchy = function(){
+            $scope.showHierarchy = function () {
                 $scope.isHierarchy = true;
             };
 
-            $scope.hide_hierarchy = function(){
+            $scope.hideHierarchy = function () {
                 $scope.isHierarchy = false;
             };
 
+            $scope.chooseFacility = function (facility) {
+                $scope.chosenFacility = facility;
 
+                apiService.getFacilitiesWithParent(facility).query(function (result) {
+                    $scope.topFacilities = result;
+                });
+            };
         }
     ]);
 
