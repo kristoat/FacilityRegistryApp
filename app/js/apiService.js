@@ -40,6 +40,12 @@
 
             },
 
+            getFacility : function(id){
+                return $resource(
+                    $rootScope.dhisAPI + '/api/organisationUnits/' + id,{},{}
+                );
+            },
+
             getAllFacilities: function(){
                 return $resource(
 

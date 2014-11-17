@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>Facility Registry App</title>
 
-
     <!-- CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 
     <!-- Angular -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- Application -->
-    <script src="js/app.js"></script>
+    <script src="app.js"></script>
     <script src="js/controller.js"></script>
     <script src="js/apiService.js"></script>
 </head>
@@ -21,56 +21,9 @@
 <body>
 <h3>Facility Registry App</h3>
 
-<div ng-controller="siteController">
-    <p>{{content}}</p>
+<!-- App content -->
+<div ng-view></div>
 
-    <div ng-controller="listViewController">
-
-        <button class="btn btn-default" ng-click="showHierarchy()">Show hierarchy</button>
-        <button class="btn btn-default" ng-click="hideHierarchy()">Show all facilities</button>
-
-        <div ng-hide="isHierarchy">
-            <h3> Facility list - Loaded from API</h3>
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Unit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="facility in facilities">
-                    <td>{{facility.name}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div ng-show="isHierarchy">
-            <h3> Facility Hierarchy - Loaded from API</h3>
-
-            <!-- breadcrumbs -->
-            <ol class="breadcrumb">
-                <li ng-click="getFacilitiesOnLevel(2)">Top</li>
-            </ol>
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Unit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="facility in topFacilities | orderBy: 'na'" ng-click="chooseFacility(facility)">
-                    <td>{{facility.na}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-</div>
-</div>
 
 </body>
 </html>

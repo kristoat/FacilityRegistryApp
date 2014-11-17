@@ -1,0 +1,23 @@
+<div>
+    <ol class="breadcrumb" >
+        <li ng-repeat="navItem in navItems" class="active">
+            <span ng-if="navItem.active">{{navItem.text}}</span>
+            <a ng-if="!navItem.active" ng-click="onNavItemClick(navItem)">{{navItem.text}}</a>
+        </li>
+
+    </ol>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Unit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="facility in facilities">
+            <td ng-click="onFacilityClick(facility)"><a>{{facility.na || facility.name}}</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
