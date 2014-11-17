@@ -24,7 +24,7 @@
                 templateUrl : 'views/orglist.html',
                 controller : 'orgunitsController'
             }).otherwise({
-                redirectTo: 'lol'
+                redirectTo: '/orgunits/top'
             });
         }
     ]);
