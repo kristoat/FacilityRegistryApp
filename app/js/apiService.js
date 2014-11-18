@@ -24,20 +24,6 @@
                     {
                     }
                 );
-
-            },
-
-            getFacilitiesWithParent: function(parent){
-                return $resource(
-
-                $rootScope.dhisAPI + '/api/geoFeatures.json',
-                {
-                    "ou" : "ou:LEVEL-" + (parent.le + 1) + ";" + parent.id
-                },
-                {
-                }
-                );
-
             },
 
             getFacility : function(id){

@@ -70,10 +70,4 @@
         }
     ]);
 
-    controllers.controller('orgunitController', ['$scope', 'apiService',
-        function ($scope, apiService) {
-            console.log($scope.selectedFacility );
-        }
-    ]);
-
 })(angular.module('appControllers'));
