@@ -53,7 +53,33 @@
             };
 
             $scope.showDetails = function(facility){
+
+                var rawGeoData = JSON.parse(facility.coordinates || facility.co)[0][0];
                 $scope.selectedFacility = facility;
+
+                var coords = [];
+                for(var i = 0; i < rawGeoData.length; i++){
+                    var x = rawGeoData[i][0];
+                    var y = rawGeoData[i][1];
+                    coords.push({latitude : y, longitude : x});
+                }
+
+                $scope.polygons = [ {
+                    id: 1,
+                    path:coords,
+                    stroke: {
+                        color: '#6060FB',
+                        weight: 3
+                    },
+                    editable: true,
+                    draggable: false,
+                    geodesic: false,
+                    visible: true,
+                    fill: {
+                        color: '#ff0000',
+                        opacity: 0.8
+                    }
+                }];
             };
 
             function setActiveFacility(text, href, id, level){
@@ -84,10 +110,10 @@
             GoogleMapApi.then(function() {
                 $scope.modalMap = {
                     center: {
-                        latitude: 45,
-                        longitude: -73
+                        latitude: 7.4434,
+                        longitude: -12.4815
                     },
-                    zoom: 2,
+                    zoom: 8,
                     events: {
                         tilesloaded: function (map) {
                             $scope.$apply(function () {

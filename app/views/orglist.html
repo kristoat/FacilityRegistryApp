@@ -46,7 +46,19 @@
                     <h4 class="modal-title" id="myModalLabel">{{selectedFacility.na || selectedFacility.name}}</h4>
                 </div>
                 <div class="modal-body">
-                    <ui-gmap-google-map center='modalMap.center' zoom='modalMap.zoom' control="modalMap.control" events="modalMap.events"></ui-gmap-google-map>
+                    <ui-gmap-google-map center='modalMap.center' zoom='modalMap.zoom' control="modalMap.control" events="modalMap.events">
+                        <ui-gmap-polygon
+                                static="true"
+                                ng-repeat="p in polygons"
+                                path="p.path" stroke="p.stroke"
+                                visible="p.visible"
+                                geodesic="p.geodesic"
+                                fill="p.fill"
+                                fit="false"
+                                editable="p.editable"
+                                draggable="p.draggable">
+                        </ui-gmap-polygon>
+                    </ui-gmap-google-map>
                 </div>
 
                 <div class="modal-footer">
