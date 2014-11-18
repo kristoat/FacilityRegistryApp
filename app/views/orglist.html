@@ -4,7 +4,6 @@
             <span ng-if="navItem.active">{{navItem.text}}</span>
             <a ng-if="!navItem.active" ng-click="onNavItemClick(navItem)">{{navItem.text}}</a>
         </li>
-
     </ol>
 
     <div class="row">
@@ -26,10 +25,9 @@
             </table>
         </div>
         <div class="col-lg-6">
-            <span>Hello!</span>
+            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
         </div>
     </div>
-
 
     <!-- Org units modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

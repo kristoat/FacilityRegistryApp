@@ -63,12 +63,14 @@
             }
 
             function getTopLevelFacilities(){
-                apiService.getFacilitiesOnLevel(2).query(function (result) {
-                    $scope.facilities = result;
+                apiService.getFacilitiesOnLevel(2).query(function (result){
+                    $scope.facilities = result.organisationUnits;
                 });
             }
 
-            GoogleMapApi.then(function(maps) {
+            GoogleMapApi.then(function() {
+
+                $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 2 };
 
             });
         }
