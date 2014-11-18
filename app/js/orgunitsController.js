@@ -16,13 +16,13 @@
 
             $scope.onFacilityClick = function(facility){
 
-                apiService.getFacilitiesWithParent(facility).query(function(result){
+                console.log(facility);
+                var level = parseInt(facility.properties.level) + 1;
 
-                    var name = facility.na || facility.name;
-                    var level = facility.le || facility.level;
+                apiService.getFacilitiesWithParent(facility.id, level).query(function(result){
 
-                    setActiveFacility(name, "/#/orgunits", facility.id, level);
-                    $scope.facilities = result;
+                    setActiveFacility(facility.properties.name, "/#/orgunits", facility.id, facility.properties.level);
+                    $scope.facilities = result.features;
                 });
             };
 
@@ -42,10 +42,12 @@
                     getTopLevelFacilities();
                 }else {
 
+                    var level = parseInt(navItem.level) + 1;
                     console.log("navitem", navItem);
-                    apiService.getFacilitiesWithParent(navItem).query(function(result){
+
+                    apiService.getFacilitiesWithParent(navItem.id, level).query(function(result){
                         console.log(result);
-                        $scope.facilities = result;
+                        $scope.facilities = result.features;
                     });
                 }
             };
@@ -63,18 +65,18 @@
                     href : href,
                     active : true,
                     id : id,
-                    le : level
+                    level : level
                 };
 
                 $scope.navItems.push(navItem);
             };
 
             function getTopLevelFacilities(){
-                apiService.getFacilitiesOnLevel(2).query(function (result){
-                    $scope.facilities = result;
+                apiService.getFacilitiesOnLevel(2).get(function (result){
+                    $scope.facilities = result.features;
 
+                    var coordinates = result.features[0].geometry.coordinates[0][0];
                     /* Retrieve the coordinates of first facility on level 2 and zoom in on the first pair of coordinates */
-                    var coordinates = JSON.parse($scope.facilities[0].co)[0][0];
                     $scope.map = { center: { latitude: coordinates[0][1], longitude: coordinates[0][0]}, zoom: 8 };
                 });
             };

@@ -16,10 +16,15 @@
             getFacilitiesOnLevel: function (level) {
 
                 return $resource(
-                    $rootScope.dhisAPI + '/api/geoFeatures.json',
+                    $rootScope.dhisAPI + '/api/organisationUnits.geojson',
                     {
-                        ou: "ou:LEVEL-" + level
-                    }, {}
+                        level: level
+                    },
+                    {
+                        'query': {
+                            isArray: false
+                        }
+                    }
                 );
             },
 
@@ -38,18 +43,20 @@
                 );
             },
 
-            getFacilitiesWithParent: function (parent) {
-
-                console.log("parent", parent);
-                var level = (parent.level || parent.le) + 1;
-
+            getFacilitiesWithParent: function (parentId, parentLevel) {
 
                 return $resource(
-                    $rootScope.dhisAPI + '/api/geoFeatures.json',
+                    $rootScope.dhisAPI + '/api/organisationUnits.geoJson',
                     {
-                        "ou": "ou:LEVEL-" + level + ";" + parent.id
+                        "level": parentLevel,
+                        "parent": parentId
                     },
-                    {}
+                    {
+                        'query': {
+                            isArray: false
+                        }
+
+                    }
                 );
             }
         }
