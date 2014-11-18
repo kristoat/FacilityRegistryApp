@@ -54,7 +54,7 @@
 
             $scope.showDetails = function(facility){
 
-                var rawGeoData = JSON.parse(facility.coordinates || facility.co)[0][0];
+                var rawGeoData = facility.geometry.coordinates[0][0];
                 $scope.selectedFacility = facility;
 
                 var coords = [];
