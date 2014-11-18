@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <ol class="breadcrumb" >
         <li ng-repeat="navItem in navItems" class="active">
             <span ng-if="navItem.active">{{navItem.text}}</span>
@@ -7,21 +7,28 @@
 
     </ol>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Unit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="facility in facilities">
-            <td ><a ng-click="onFacilityClick(facility)">{{facility.na || facility.name}}</a></td>
-            <td><button ng-click="showDetails(facility)" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                Launch demo modal
-            </button></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Unit</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="facility in facilities">
+                    <td ><a ng-click="onFacilityClick(facility)">{{facility.na || facility.name}}</a></td>
+                    <td><button ng-click="showDetails(facility)" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Launch demo modal
+                    </button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <span>Hello!</span>
+        </div>
+    </div>
 
 
     <!-- Org units modal -->
@@ -33,7 +40,7 @@
                     <h4 class="modal-title" id="myModalLabel">{{selectedFacility.na || selectedFacility.name}}</h4>
                 </div>
                 <div class="modal-body">
-                    Content goes here. Maybe just the map?
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
                 </div>
 
                 <div class="modal-footer">
