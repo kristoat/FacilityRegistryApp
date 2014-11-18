@@ -63,7 +63,6 @@
             };
 
             $scope.showDetails = function(facility){
-                console.log(facility);
                 $scope.selectedFacility = facility;
             };
 
@@ -93,7 +92,20 @@
             };
 
             GoogleMapApi.then(function() {
-
+                $scope.modalMap = {
+                    center: {
+                        latitude: 45,
+                        longitude: -73
+                    },
+                    zoom: 2,
+                    events: {
+                        tilesloaded: function (map) {
+                            $scope.$apply(function () {
+                                google.maps.event.trigger(map, "resize");
+                            });
+                        }
+                    }
+                }
             });
         }
     ]);
