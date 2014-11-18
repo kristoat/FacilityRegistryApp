@@ -1,4 +1,4 @@
-(function(services){
+(function (services) {
     'use strict';
 
     services.factory("apiService", function ($resource, $rootScope) {
@@ -13,47 +13,45 @@
 
         return {
 
-            getFacilitiesOnLevel: function(level){
+            getFacilitiesOnLevel: function (level) {
 
                 return $resource(
-
-                    $rootScope.dhisAPI + '/api/organisationUnits',
+                    $rootScope.dhisAPI + '/api/geoFeatures.json',
                     {
-                        "level" : level,
-                        "fields" : "name, id, coordinates, children, level"
-                    },
-                    {
-                        'query' : {
-                            isArray : false
-                        }
-                    }
+                        ou: "ou:LEVEL-" + level
+                    }, {}
                 );
             },
 
-            getFacility : function(id){
+            getAllFacilities: function () {
                 return $resource(
-                    $rootScope.dhisAPI + '/api/organisationUnits/' + id,{},{}
-                );
-            },
-
-            getAllFacilities: function(){
-                return $resource(
-
-
                     $rootScope.dhisAPI + '/api/organisationUnits',
                     {
                         // If you're passing variables, for example into the URL
                         // they would be here and then as :varName in the URL
                     },
                     {
-                        'query' : {
-                            isArray : false
+                        'query': {
+                            isArray: false
                         }
                     }
                 );
+            },
+
+            getFacilitiesWithParent: function (parent) {
+
+                console.log("parent", parent);
+                var level = (parent.level || parent.le) + 1;
+
+
+                return $resource(
+                    $rootScope.dhisAPI + '/api/geoFeatures.json',
+                    {
+                        "ou": "ou:LEVEL-" + level + ";" + parent.id
+                    },
+                    {}
+                );
             }
         }
-
-
     });
 })(angular.module('appServices'));
