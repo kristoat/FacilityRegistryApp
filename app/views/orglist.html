@@ -4,8 +4,9 @@
             <span ng-if="navItem.active">{{navItem.text}}</span>
             <a ng-if="!navItem.active" ng-click="onNavItemClick(navItem)">{{navItem.text}}</a>
         </li>
-
     </ol>
+
+    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
 
     <table class="table table-striped">
         <thead>

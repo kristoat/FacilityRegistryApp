@@ -17,11 +17,15 @@
 
                 return $resource(
 
-                    $rootScope.dhisAPI + '/api/geoFeatures',
+                    $rootScope.dhisAPI + '/api/organisationUnits',
                     {
-                        "ou" : "ou:LEVEL-" + level
+                        "level" : level,
+                        "fields" : "name, id, coordinates, children, level"
                     },
                     {
+                        'query' : {
+                            isArray : false
+                        }
                     }
                 );
             },
