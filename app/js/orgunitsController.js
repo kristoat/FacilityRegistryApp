@@ -1,7 +1,7 @@
 (function (controllers) {
     'use strict';
-    controllers.controller('orgunitsController', ['$scope', '$routeParams', 'apiService',
-        function ($scope, $routeParams, apiService) {
+    controllers.controller('orgunitsController', ['$scope', '$routeParams', 'apiService', 'GoogleMapApi'.ns(),
+        function ($scope, $routeParams, apiService, GoogleMapApi) {
 
             $scope.navItems = [];
             setActiveFacility("Top level", "#/orgunits/all", undefined);
@@ -67,6 +67,10 @@
                     $scope.facilities = result;
                 });
             }
+
+            GoogleMapApi.then(function(maps) {
+
+            });
         }
     ]);
 
