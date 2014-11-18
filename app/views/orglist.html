@@ -30,7 +30,7 @@
     </div>
 
     <!-- Org units modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div  class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -38,7 +38,7 @@
                     <h4 class="modal-title" id="myModalLabel">{{selectedFacility.na || selectedFacility.name}}</h4>
                 </div>
                 <div class="modal-body">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+                    <ui-gmap-google-map center='modalMap.center' zoom='modalMap.zoom' control="modalMap.control" events="modalMap.events"></ui-gmap-google-map>
                 </div>
 
                 <div class="modal-footer">
