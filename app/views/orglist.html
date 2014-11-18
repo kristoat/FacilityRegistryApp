@@ -15,8 +15,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="facility in facilities">
-                    <td ><a ng-click="onFacilityClick(facility)">{{facility.na || facility.name}}</a></td>
+                <tr ng-repeat="facility in facilities | orderBy: 'na' ">
+                    <td ><a ng-click="onFacilityClick(facility)">{{facility.na}}</a></td>
                     <td><button ng-click="showDetails(facility)" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                         Launch demo modal
                     </button></td>
@@ -25,7 +25,13 @@
             </table>
         </div>
         <div class="col-lg-6">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+
+            <div id="map_canvas" ng-controller="mapController">
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" bounds="map.bounds">
+                    <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+                    </ui-gmap-markers>
+                </ui-gmap-google-map>
+            </div>
         </div>
     </div>
 

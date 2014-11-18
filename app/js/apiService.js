@@ -16,24 +16,9 @@
             getFacilitiesOnLevel: function (level) {
 
                 return $resource(
-                    $rootScope.dhisAPI + '/api/organisationUnits',
+                    $rootScope.dhisAPI + '/api/geoFeatures.json',
                     {
-                        "level": level,
-                        "fields": "name,id,coordinates,children,level"
-                    },
-                    {
-                        'query': {
-                            isArray: false
-                        }
-                    }
-                );
-            },
-
-            getFacility: function (id) {
-                return $resource(
-                    $rootScope.dhisAPI + '/api/organisationUnits/' + id, {
-
-                        "fields": "name,id,coordinates,children,level"
+                        ou: "ou:LEVEL-" + level
                     }, {}
                 );
             },
@@ -53,9 +38,7 @@
                 );
             },
 
-
             getFacilitiesWithParent: function (parent) {
-
 
                 console.log("parent", parent);
                 var level = (parent.level || parent.le) + 1;
@@ -70,7 +53,5 @@
                 );
             }
         }
-
-
     });
 })(angular.module('appServices'));

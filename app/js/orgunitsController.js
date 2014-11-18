@@ -24,13 +24,6 @@
                     setActiveFacility(name, "/#/orgunits", facility.id, level);
                     $scope.facilities = result;
                 });
-
-                /*
-               apiService.getFacility(facility.id).get(function(result){
-                   setActiveFacility(result.name, "/#/orgunits", facility.id);
-                   $scope.facilities = result.children;
-                   console.log($scope.facilities);
-               });*/
             };
 
             $scope.onNavItemClick = function(navItem){
@@ -54,11 +47,6 @@
                         console.log(result);
                         $scope.facilities = result;
                     });
-
-                    /*
-                    apiService.getFacility(navItem.id).get(function(result){
-                        $scope.facilities = result.children;
-                    });*/
                 }
             };
 
@@ -83,10 +71,10 @@
 
             function getTopLevelFacilities(){
                 apiService.getFacilitiesOnLevel(2).query(function (result){
-                    $scope.facilities = result.organisationUnits;
+                    $scope.facilities = result;
 
                     /* Retrieve the coordinates of first facility on level 2 and zoom in on the first pair of coordinates */
-                    var coordinates = JSON.parse($scope.facilities[0].coordinates)[0][0];
+                    var coordinates = JSON.parse($scope.facilities[0].co)[0][0];
                     $scope.map = { center: { latitude: coordinates[0][1], longitude: coordinates[0][0]}, zoom: 8 };
                 });
             };
