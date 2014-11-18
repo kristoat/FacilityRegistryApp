@@ -65,12 +65,15 @@
             function getTopLevelFacilities(){
                 apiService.getFacilitiesOnLevel(2).query(function (result){
                     $scope.facilities = result.organisationUnits;
+
+                    /* Retrieve the coordinates of first facility on level 2 and zoom in on the first pair of coordinates */
+                    var coordinates = JSON.parse($scope.facilities[0].coordinates)[0][0];
+                    $scope.map = { center: { latitude: coordinates[0][1], longitude: coordinates[0][0]}, zoom: 8 };
+
                 });
             }
 
             GoogleMapApi.then(function() {
-
-                $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 2 };
 
             });
         }
