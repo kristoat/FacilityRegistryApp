@@ -16,24 +16,10 @@
             getFacilitiesOnLevel: function (level) {
 
                 return $resource(
-                    $rootScope.dhisAPI + '/api/organisationUnits.geojson',
-                    {
-                        level: level
-                    },
-                    {
-                        'query': {
-                            isArray: false
-                        }
-                    }
-                );
-            },
-
-            getAllFacilities: function () {
-                return $resource(
                     $rootScope.dhisAPI + '/api/organisationUnits',
                     {
-                        // If you're passing variables, for example into the URL
-                        // they would be here and then as :varName in the URL
+                        level: level,
+                        fields: "id,name,coordinates"
                     },
                     {
                         'query': {
@@ -43,19 +29,16 @@
                 );
             },
 
-            getFacilitiesWithParent: function (parentId, parentLevel) {
+            getFacility: function (id) {
 
                 return $resource(
-                    $rootScope.dhisAPI + '/api/organisationUnits.geoJson',
-                    {
-                        "level": parentLevel,
-                        "parent": parentId
-                    },
-                    {
+                    $rootScope.dhisAPI + '/api/organisationUnits/', {
+                        filter: "id:eq:" + id,
+                        fields: "id,name,children[id,name,coordinates]"
+                    }, {
                         'query': {
                             isArray: false
                         }
-
                     }
                 );
             }

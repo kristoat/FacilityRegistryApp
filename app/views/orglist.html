@@ -15,8 +15,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="facility in facilities | orderBy: 'properties.name' ">
-                    <td ><a ng-click="onFacilityClick(facility)">{{facility.properties.name}}</a></td>
+                <tr ng-repeat="facility in facilities | orderBy: 'name' ">
+                    <td ><a ng-click="onFacilityClick(facility)">{{facility.name}}</a></td>
                     <td><button ng-click="showDetails(facility)" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                         Launch demo modal
                     </button></td>

@@ -4,7 +4,7 @@
         function ($scope, $routeParams, apiService, GoogleMapApi) {
 
             $scope.navItems = [];
-            setActiveFacility("Top level", "#/orgunits/all", undefined, undefined);
+            setActiveFacility("Top level", "#/orgunits/all", undefined);
 
             if($routeParams.query === 'top'){
                 getTopLevelFacilities();
@@ -14,17 +14,18 @@
                 });
             }
 
-            $scope.onFacilityClick = function(facility){
 
-                console.log(facility);
-                var level = parseInt(facility.properties.level) + 1;
+            $scope.onFacilityClick = function(facility) {
 
-                apiService.getFacilitiesWithParent(facility.id, level).query(function(result){
+                apiService.getFacility(facility.id).get(function (result) {
 
-                    setActiveFacility(facility.properties.name, "/#/orgunits", facility.id, facility.properties.level);
-                    $scope.facilities = result.features;
+
+                    console.log(result);
+
+                    setActiveFacility(facility.name, "/#/orgunits", facility.id);
+                    $scope.facilities = result.organisationUnits[0].children;
                 });
-            };
+            }
 
             $scope.onNavItemClick = function(navItem){
                 function removeNestedItems() {
@@ -41,20 +42,15 @@
                 if(navItem.id === undefined){
                     getTopLevelFacilities();
                 }else {
-
-                    var level = parseInt(navItem.level) + 1;
-                    console.log("navitem", navItem);
-
-                    apiService.getFacilitiesWithParent(navItem.id, level).query(function(result){
-                        console.log(result);
-                        $scope.facilities = result.features;
+                    apiService.getFacility(navItem.id).get(function(result){
+                        $scope.facilities = result.organisationUnits[0].children;
                     });
                 }
             };
 
             $scope.showDetails = function(facility){
 
-                var rawGeoData = facility.geometry.coordinates[0][0];
+                var rawGeoData = facility.coordinates[0][0];
                 $scope.selectedFacility = facility;
 
                 var coords = [];
@@ -82,7 +78,7 @@
                 }];
             };
 
-            function setActiveFacility(text, href, id, level){
+            function setActiveFacility(text, href, id){
                 for(var i = 0; i < $scope.navItems.length; i++){
                     $scope.navItems[i].active = false;
                 }
@@ -90,8 +86,7 @@
                     text : text,
                     href : href,
                     active : true,
-                    id : id,
-                    level : level
+                    id : id
                 };
 
                 $scope.navItems.push(navItem);
@@ -99,9 +94,11 @@
 
             function getTopLevelFacilities(){
                 apiService.getFacilitiesOnLevel(2).get(function (result){
-                    $scope.facilities = result.features;
+                    $scope.facilities = result.organisationUnits;
 
-                    var coordinates = result.features[0].geometry.coordinates[0][0];
+
+                    var coordinates = JSON.parse($scope.facilities[0].coordinates)[0][0];
+
                     /* Retrieve the coordinates of first facility on level 2 and zoom in on the first pair of coordinates */
                     $scope.map = { center: { latitude: coordinates[0][1], longitude: coordinates[0][0]}, zoom: 8 };
                 });
