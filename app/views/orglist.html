@@ -13,9 +13,10 @@
                 <tr>
                     <th>Unit</th>
                 </tr>
+                <input class="form-control" placeholder="Search" ng-model="search.name"><br>
                 </thead>
                 <tbody>
-                <tr ng-repeat="facility in facilities | orderBy: 'name' ">
+                <tr ng-repeat="facility in facilities | orderBy: 'name' | filter:search:strict"> <!--" | filter: searchText">-->
                     <td ><a ng-click="onFacilityClick(facility)">{{facility.name}}</a></td>
                     <td><button ng-click="showDetails(facility)" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                         Launch demo modal
