@@ -19,9 +19,6 @@
 
                 apiService.getFacility(facility.id).get(function (result) {
 
-
-                    console.log(result);
-
                     setActiveFacility(facility.name, "/#/orgunits", facility.id);
                     $scope.facilities = result.organisationUnits[0].children;
                 });
@@ -50,7 +47,8 @@
 
             $scope.showDetails = function(facility){
 
-                var rawGeoData = facility.coordinates[0][0];
+
+                var rawGeoData = JSON.parse(facility.coordinates)[0][0];
                 $scope.selectedFacility = facility;
 
                 var coords = [];
@@ -96,10 +94,8 @@
                 apiService.getFacilitiesOnLevel(2).get(function (result){
                     $scope.facilities = result.organisationUnits;
 
-
-                    var coordinates = JSON.parse($scope.facilities[0].coordinates)[0][0];
-
                     /* Retrieve the coordinates of first facility on level 2 and zoom in on the first pair of coordinates */
+                    var coordinates = JSON.parse($scope.facilities[0].coordinates)[0][0];
                     $scope.map = { center: { latitude: coordinates[0][1], longitude: coordinates[0][0]}, zoom: 8 };
                 });
             };
